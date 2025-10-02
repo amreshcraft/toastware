@@ -1,10 +1,10 @@
 import './style.css'
 import { useToast } from '../toast-provider/ToastProvider'
-import Info from '../assets/info.png'
-import Success from '../assets/success.png'
-import Warning from "../assets/warning.png"
-import ErrorIcon from "../assets/error.png"
-import Close from '../assets/close.png'
+import Info from '../../assets/info.png'
+import Success from '../../assets/success.png'
+import Warning from "../../assets/warning.png"
+import ErrorIcon from "../../assets/error.png"
+import Close from '../../assets/close.png'
 
 const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   info: Info,
