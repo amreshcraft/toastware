@@ -1,15 +1,15 @@
 {
   "name": "toastware",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
-   "description": "A lightweight React toast notification library with animations and custom styles.",
-  "main": "dist/index.js",           
-  "module": "dist/index.esm.js",   
-  "types": "dist/index.d.ts",       
+  "description": "A lightweight React toast notification library with animations and custom styles.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist"                            
+    "dist"
   ],
-   "keywords": [
+  "keywords": [
     "toastware",
     "react",
     "toast",
@@ -27,13 +27,12 @@
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },
-
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "npm run build"  
+    "prepare": "npm run build"
   },
   "dependencies": {
     "react": "^19.1.1",
