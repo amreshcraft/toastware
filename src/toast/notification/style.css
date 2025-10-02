@@ -14,6 +14,15 @@
     background-color: var(--danger-bg);
     padding: 20px;
     position: relative;
+    display: flex;
+    justify-content: space-betwee
+}
+
+.toast-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .toast-close {
@@ -32,37 +41,4 @@
     align-items: flex-start;
     gap: 12px;
     width: 95%;
-}
-
-.toast-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    width: 100%;
-}
-
-
-.toast-title-desc {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    text-align: left;
-}
-
-.toast-cta{
-width: 100px;
-max-height: 100px;
-
-}
-.toast-progress {
-    height: 4px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: yellow;
-    border-radius: 6px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }

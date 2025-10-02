@@ -1,0 +1,54 @@
+:root {
+    --success: #046904;
+    --error: #fa0404;
+    --warning:#b19911;
+    --info: #086397;
+     --success-bg: #a0f8a0;
+    --error-bg: #f5bcbc;
+    --warning-bg:#f4f7c9;
+    --info-bg: #a1d8f8;
+  
+}
+
+
+.toast {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-width: 300px;
+}
+
+.toast-content{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+[data-toast-type="info"] {
+    background-color:var(--info-bg);
+    color: var(--info);
+}
+
+[data-toast-type="warning"] {
+    background-color: var(--warning-bg);
+    color: var(--warning);
+}
+
+[data-toast-type="error"] {
+    background-color: var(--error-bg);
+    color: var(--error);
+}
+
+[data-toast-type="success"] {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+
+.toast-close {
+    background-color: transparent;
+    border: none;
+}
