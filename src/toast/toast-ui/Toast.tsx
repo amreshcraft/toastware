@@ -1,5 +1,5 @@
 import './style.css'
-import { useToast } from './toast-provider/ToastProvider'
+import { useToast } from '../toast-provider/ToastProvider'
 import Info from '../assets/info.png'
 import Success from '../assets/success.png'
 import Warning from "../assets/warning.png"
@@ -14,7 +14,7 @@ const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
 };
 
 type ToastProps = {
-  id: string; 
+  id: string;
   message: string;
   type?: "success" | "error" | "info" | "warning";
   duration?: number;

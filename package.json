@@ -1,13 +1,40 @@
 {
-  "name": "toastify001",
+  "name": "toastware",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+   "description": "A lightweight React toast notification library with animations and custom styles.",
+  "main": "dist/index.js",           
+  "module": "dist/index.esm.js",   
+  "types": "dist/index.d.ts",       
+  "files": [
+    "dist"                            
+  ],
+   "keywords": [
+    "toastware",
+    "react",
+    "toast",
+    "notification",
+    "react-component",
+    "alert"
+  ],
+  "author": "Amresh amresh.terminal@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amreshcraft/toastware.git"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "npm run build"  
   },
   "dependencies": {
     "react": "^19.1.1",

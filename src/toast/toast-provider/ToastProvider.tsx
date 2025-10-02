@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
-import getOrCreatePortalRoot from "../utils/portal";
-import Toast from "../Toast";
+import getOrCreatePortalRoot from "../utils";
+import Toast from "../toast-ui/Toast";
 
 
 type Toast = {
@@ -14,7 +14,7 @@ type Toast = {
 
 
 type ToastContextType = {
-    addToast: (message: string, type?: Toast["type"], position? : Toast["position"],duration?: number) => void;
+    addToast: (message: string, type?: Toast["type"], position?: Toast["position"], duration?: number) => void;
     removeToast: (id: string) => void;
 };
 
@@ -31,9 +31,9 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
     }, []);
 
     const addToast = useCallback(
-        (message: string, type: Toast["type"] = "info",position :Toast["position"] = "top-right", duration = 5000) => {
+        (message: string, type: Toast["type"] = "info", position: Toast["position"] = "top-right", duration = 5000) => {
             const id = crypto.randomUUID();
-            const newToast: Toast = { id, message, type, position,duration };
+            const newToast: Toast = { id, message, type, position, duration };
             setToasts((prev) => [...prev, newToast]);
 
             if (duration > 0) {
@@ -53,7 +53,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
                 ReactDOM.createPortal(
                     <div className="toast-container">
                         {toasts.map((toast) => (
-                          <Toast {...toast}  key={toast.id}/>
+                            <Toast {...toast} key={toast.id} />
                         ))}
                     </div>,
                     getOrCreatePortalRoot()
