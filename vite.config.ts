@@ -1,23 +1,24 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: 'src/index.jsx',  // tumhara library entry point
-      name: 'Toastware',        // global var name for UMD build
+      entry: path.resolve(__dirname, 'src/index.jsx'),
+      name: 'Toastware',
       fileName: (format) => `toastware.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom'], // peer dependencies
+      external: ['react', 'react-dom'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        }
+        },
+        exports: 'named'  // <- add this
       }
-    }
+    },
   }
 })

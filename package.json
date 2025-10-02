@@ -3,8 +3,8 @@
   "version": "1.0.2",
   "type": "module",
   "description": "A lightweight React toast notification library with animations and custom styles.",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/toastware.umd.js",
+  "module": "dist/toastware.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -35,11 +35,12 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@types/node": "^24.6.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
