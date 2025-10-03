@@ -1,44 +1,36 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react"
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
 import getOrCreatePortalRoot from "../utils";
-import Toast from "../toast-ui/Toast";
-
-
-type Toast = {
-    id: string;
-    message: string;
-    type?: "success" | "error" | "info" | "warning";
-    position: "top-right" | "top-left" | "bottom-left" | "bottom-right";
-    duration?: number; // ms
-};
-
-
-type ToastContextType = {
-    addToast: (message: string, type?: Toast["type"], position?: Toast["position"], duration?: number) => void;
-    removeToast: (id: string) => void;
-};
+import type { ToastContextType, ToastItem } from "../types/types";
+import ToastContainer from "../toast-container/ToastContainer";
 
 
 
-const ToastContext = createContext<ToastContextType | null>(null);
+
+export const ToastContext = createContext<ToastContextType | null>(null);
 
 export default function ToastProvider({ children }: { children: ReactNode }) {
+const [portalRoot, setPortalRoot] = useState<HTMLElement>();
 
-    const [toasts, setToasts] = useState<Toast[]>([])
+useEffect(() => {
+  setPortalRoot(getOrCreatePortalRoot());
+}, []);
+
+    const [toasts, setToasts] = useState<ToastItem[]>([])
 
     const removeToast = useCallback((id: string) => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, []);
 
     const addToast = useCallback(
-        (message: string, type: Toast["type"] = "info", position: Toast["position"] = "top-right", duration = 5000) => {
+        (message: string, type: ToastItem["type"] = "info", position: ToastItem["position"] = "top-right", duration = 5000) => {
             const id = crypto.randomUUID();
-            const newToast: Toast = { id, message, type, position, duration };
+            const newToast: ToastItem = { id, message, type, position, duration };
             setToasts((prev) => [...prev, newToast]);
 
-            if (duration > 0) {
-                setTimeout(() => removeToast(id), duration);
-            }
+            // if (duration > 0) {
+            //     setTimeout(() => removeToast(id), duration);
+            // }
         },
         [removeToast]
     );
@@ -49,26 +41,16 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
             {children}
             {/* render all toast in react portal */}
 
-            {
+            { portalRoot &&
                 ReactDOM.createPortal(
-                    <div className="toast-container">
-                        {toasts.map((toast) => (
-                            <Toast {...toast} key={toast.id} />
-                        ))}
-                    </div>,
-                    getOrCreatePortalRoot()
-                )}
+                  <ToastContainer toasts={toasts}/> ,
+                    portalRoot!
+                )
+                
+                }
 
         </ToastContext.Provider>
     )
 }
 
 
-
-export function useToast() {
-    const context = useContext(ToastContext);
-    if (!context) {
-        throw new Error("useToast must use within ToastContainer")
-    }
-    return context;
-}

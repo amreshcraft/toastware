@@ -1,10 +1,11 @@
 import './style.css'
-import { useToast } from '../toast-provider/ToastProvider'
 import Info from '../../assets/info.png'
 import Success from '../../assets/success.png'
 import Warning from "../../assets/warning.png"
 import ErrorIcon from "../../assets/error.png"
 import Close from '../../assets/close.png'
+import { useToast } from '../hook/useToast'
+import type { ToastItem } from '../types/types'
 
 const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   info: Info,
@@ -13,15 +14,8 @@ const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   error: ErrorIcon,
 };
 
-type ToastProps = {
-  id: string;
-  message: string;
-  type?: "success" | "error" | "info" | "warning";
-  position: "top-right" | "top-left" | "bottom-left" | "bottom-right";
-  duration?: number;
-};
 
-export default function Toast({ id, message, type = "info",position }: ToastProps) {
+export default function Toast({ id, message, type = "info",position }:ToastItem) {
   const { removeToast } = useToast();
 
   return (
