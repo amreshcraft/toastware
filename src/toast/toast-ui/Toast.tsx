@@ -17,14 +17,15 @@ type ToastProps = {
   id: string;
   message: string;
   type?: "success" | "error" | "info" | "warning";
+  position: "top-right" | "top-left" | "bottom-left" | "bottom-right";
   duration?: number;
 };
 
-export default function Toast({ id, message, type = "info" }: ToastProps) {
+export default function Toast({ id, message, type = "info",position }: ToastProps) {
   const { removeToast } = useToast();
 
   return (
-    <div className="toast" data-toast-type={type}>
+    <div className={`toast ${position}`} data-toast-type={type} >
       <div className="toast-content">
         <img src={ToastIcons[type]} width={45} height={45} alt={type} />
         <span>{message}</span>
