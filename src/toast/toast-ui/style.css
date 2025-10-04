@@ -1,7 +1,7 @@
 :root {
   --success: #046904;
   --error: #fa0404;
-  --warning: #b19911;
+  --warning: #e9c70a;
   --info: #086397;
   --success-bg: #a0f8a0;
   --error-bg: #f5bcbc;
@@ -17,7 +17,7 @@
   max-width: 500px;
   padding: 8px 12px;
   border-radius: 10px;
-  position: absolute;
+  position: relative;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: toast-slide-in 0.3s ease-out;
 }
@@ -36,10 +36,7 @@
   animation: toast-slide-out 0.3s ease-out forwards;
 }
 
-.toast.top-right { top: 10px; right: 10px; }
-.toast.bottom-right { bottom: 10px; right: 10px; }
-.toast.top-left { top: 10px; left: 10px; }
-.toast.bottom-left { bottom: 10px; left: 10px; }
+
 
 .toast-content {
   display: flex;
@@ -79,6 +76,45 @@
   cursor: pointer;
   opacity: 0.7;
 }
+
+
+/* Progress Bar Wrapper */
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 10px 10px; /* rounded bottom corners */
+  overflow: hidden;
+}
+
+/* Progress Bar itself */
+.toast-progress-bar {
+  height: 100%;
+  width: 100%; /* will shrink with JS */
+  transition: width 0.1s linear;
+}
+
+/* Type-specific colors for progress bar */
+.toast[data-toast-type="info"] .toast-progress-bar {
+  background-color: var(--info);
+}
+
+.toast[data-toast-type="success"] .toast-progress-bar {
+  background-color: var(--success);
+}
+
+.toast[data-toast-type="warning"] .toast-progress-bar {
+  background-color: var(--warning);
+}
+
+.toast[data-toast-type="error"] .toast-progress-bar {
+  background-color: var(--error);
+}
+
+
 
 @keyframes toast-slide-in {
   from { transform: translateX(50px); opacity: 0; }
