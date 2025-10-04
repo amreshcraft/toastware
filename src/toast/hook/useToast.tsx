@@ -16,5 +16,6 @@ export function useToast() {
       addToast(msg, "success", position),
     error: (msg: string, position?: ToastItem["position"]) =>
       addToast(msg, "error", position),
+    info :(msg:string,position?: ToastItem["position"])=>addToast(msg,"info",position)
   };
 }
