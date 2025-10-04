@@ -28,9 +28,9 @@ useEffect(() => {
             const newToast: ToastItem = { id, message, type, position, duration };
             setToasts((prev) => [...prev, newToast]);
 
-            // if (duration > 0) {
-            //     setTimeout(() => removeToast(id), duration);
-            // }
+            if (duration > 0) {
+                setTimeout(() => removeToast(id), duration);
+            }
         },
         [removeToast]
     );

@@ -78,7 +78,6 @@
 }
 
 
-/* Progress Bar Wrapper */
 .toast-progress {
   position: absolute;
   bottom: 0;
@@ -86,18 +85,15 @@
   height: 4px;
   width: 100%;
   background: rgba(0, 0, 0, 0.05);
-  border-radius: 0 0 10px 10px; /* rounded bottom corners */
+  border-radius: 0 0 10px 10px; 
   overflow: hidden;
 }
 
-/* Progress Bar itself */
 .toast-progress-bar {
   height: 100%;
-  width: 100%; /* will shrink with JS */
   transition: width 0.1s linear;
 }
 
-/* Type-specific colors for progress bar */
 .toast[data-toast-type="info"] .toast-progress-bar {
   background-color: var(--info);
 }
@@ -133,7 +129,7 @@
 
 @media (max-width: 600px) {
   .toast {
-    min-width: 250px;
+    min-width: 150px;
     max-width: 90vw;
     padding: 6px 10px;
   }
