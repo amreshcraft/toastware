@@ -3,9 +3,14 @@
   "version": "1.0.3",
   "type": "module",
   "description": "A lightweight React toast notification library with animations and custom styles.",
-  "main": "dist/toastware.umd.js",
-  "module": "dist/toastware.es.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+  ".": {
+    "import": "./dist/toastware.es.js",
+    "require": "./dist/toastware.umd.js",
+    "types": "./dist/index.d.ts"
+  }
+},
+
   "files": [
     "dist"
   ],
@@ -33,10 +38,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "npm run build"
-  },
-  "dependencies": {
-    "react": ">=17.0.0",
-    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
