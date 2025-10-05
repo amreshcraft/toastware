@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
+import { createContext, useCallback, useEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
 import getOrCreatePortalRoot from "../utils";
 import type { ToastContextType, ToastItem } from "../types/types";
