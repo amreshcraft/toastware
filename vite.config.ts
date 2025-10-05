@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.jsx'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'Toastware',
       fileName: (format) => `toastware.${format}.js`
     },
