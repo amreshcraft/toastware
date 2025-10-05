@@ -1,6 +1,6 @@
 {
   "name": "toastware",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "type": "module",
   "description": "A lightweight React toast notification library with animations and custom styles.",
   "types": "./dist/index.d.ts",
@@ -61,5 +61,8 @@
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-imagemin": "^0.6.1"
+  },
+  "dependencies": {
+    "react-icons": "^5.5.0"
   }
 }
