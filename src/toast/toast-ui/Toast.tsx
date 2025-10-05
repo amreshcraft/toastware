@@ -6,7 +6,7 @@ import ErrorIcon from "../../assets/error.png"
 import Close from '../../assets/close.png'
 import { useToast } from '../hook/useToast'
 import type { ToastItem } from '../types/types'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   info: Info,
@@ -15,35 +15,58 @@ const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   error: ErrorIcon,
 };
 
-export default function Toast({ id, message, type = "info", position }: ToastItem) {
+export default function Toast({ id, message, type = "info", position,duration = 5000 }: ToastItem) {
   const { removeToast } = useToast();
   const [progress, setProgress] = useState(100);
   const [isPaused, setIsPaused] = useState(false)
 
-  useEffect(() => {
-    const duration = 5000; 
-    const step = 100 / (duration / 100); 
 
-    const interval = setInterval(() => {
-      if(!isPaused){
-      setProgress(prev => {
-        if (prev <= 0) {
-          clearInterval(interval);
-          removeToast(id);
-          return 0;
-        
+  const startTimeRef = useRef(Date.now());
+  const remainingRef = useRef(duration);
+  
+useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    const tick = () => {
+      const elapsed = Date.now() - startTimeRef.current;
+      const newRemaining = remainingRef.current - elapsed;
+
+      if (newRemaining <= 0) {
+        setProgress(0);
+        removeToast(id);
+        clearInterval(interval);
+      } else {
+        setProgress((newRemaining / duration) * 100);
       }
-        return prev - step;
-      
-      });
+    };
+
+    if (!isPaused) {
+      startTimeRef.current = Date.now(); // reset timer start
+      interval = setInterval(tick, 100);
     }
-    }, 100);
 
     return () => clearInterval(interval);
-  }, [id, removeToast,isPaused]);
+  }, [id, removeToast, duration, isPaused]);
+
+  const handlePause = () => {
+    setIsPaused(true);
+    // pause hone par remaining time calculate karke save kar lo
+    remainingRef.current -= Date.now() - startTimeRef.current;
+  };
+
+  const handleResume = () => {
+    setIsPaused(false);
+    // resume hone par naya start time set kar lo
+    startTimeRef.current = Date.now();
+  };
+
+
 
   return (
-    <div className={`toast ${position}`} data-toast-type={type} onMouseEnter={()=>setIsPaused(true)} onMouseLeave={()=>setIsPaused(false)}>
+    <div className={`toast ${position}`} data-toast-type={type}
+      onMouseEnter={handlePause}
+      onMouseLeave={handleResume}
+      >
       <div className="toast-content">
         <img src={ToastIcons[type]} width={45} height={45} alt={type} />
         <span>{message}</span>
