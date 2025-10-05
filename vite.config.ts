@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 export default defineConfig({
   plugins: [
@@ -14,6 +15,7 @@ export default defineConfig({
       exclude: ['node_modules', 'dist','src/App.tsx','src/main.tsx','src/App.css','src/index.css'],
       outDir: 'dist',
     }),
+    cssInjectedByJsPlugin(),
   ],
   build: {
     lib: {
@@ -30,12 +32,7 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
         },
         exports: 'named',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) {
-            return 'style.css';
-          }
-          return '[name].[ext]'; // Always return a string
-        },
+     
       },
     },
     cssCodeSplit: false,
