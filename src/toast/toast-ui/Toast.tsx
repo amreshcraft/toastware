@@ -1,12 +1,13 @@
 import './style.css'
+import { useToast } from '../hook/useToast'
+import type { ToastItem } from '../types/types'
+import { useEffect, useRef, useState } from 'react'
 import Info from '../../assets/info.png'
 import Success from '../../assets/success.png'
 import Warning from "../../assets/warning.png"
 import ErrorIcon from "../../assets/error.png"
 import Close from '../../assets/close.png'
-import { useToast } from '../hook/useToast'
-import type { ToastItem } from '../types/types'
-import { useEffect, useRef, useState } from 'react'
+
 
 const ToastIcons: Record<"info" | "success" | "warning" | "error", string> = {
   info: Info,
