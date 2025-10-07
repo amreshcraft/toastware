@@ -1,6 +1,6 @@
 {
   "name": "toastware",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "type": "module",
   "description": "A lightweight React toast notification library with animations and custom styles.",
   "types": "./dist/index.d.ts",
