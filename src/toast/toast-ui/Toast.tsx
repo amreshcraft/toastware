@@ -18,10 +18,30 @@ export default function Toast({ id, message, type = "info", position, duration =
   const { removeToast } = useToast();
   const [progress, setProgress] = useState(100);
   const [isPaused, setIsPaused] = useState(false);
-
+  const toastRef = useRef<HTMLDivElement>(null)
   const startTimeRef = useRef(Date.now());
   const remainingRef = useRef(duration);
+  const previousFocus = useRef<HTMLElement | null>(null);
 
+  // Focus & previous element
+  useEffect(() => {
+    previousFocus.current = document.activeElement as HTMLElement | null;
+    toastRef.current?.focus();
+  }, []);
+
+  // Keyboard dismiss (ESC)
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        removeToast(id);
+        previousFocus.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [id, removeToast]);
+
+  // Progress logic
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
@@ -32,6 +52,7 @@ export default function Toast({ id, message, type = "info", position, duration =
       if (newRemaining <= 0) {
         setProgress(0);
         removeToast(id);
+        previousFocus.current?.focus();
         clearInterval(interval);
       } else {
         setProgress((newRemaining / duration) * 100);
@@ -39,7 +60,7 @@ export default function Toast({ id, message, type = "info", position, duration =
     };
 
     if (!isPaused) {
-      startTimeRef.current = Date.now(); 
+      startTimeRef.current = Date.now();
       interval = setInterval(tick, 100);
     }
 
@@ -60,6 +81,10 @@ export default function Toast({ id, message, type = "info", position, duration =
 
   return (
     <div
+      role={type !== "error" ? "status" : "alert"}
+      aria-live={type !== "error" ? "polite" : "assertive"}
+      tabIndex={-1}
+      ref={toastRef}
       className={`toast ${position}`}
       data-toast-type={type}
       onMouseEnter={handlePause}
@@ -69,7 +94,14 @@ export default function Toast({ id, message, type = "info", position, duration =
         <Icon size={45} />
         <span>{message}</span>
       </div>
-      <button onClick={() => removeToast(id)} className="toast-close">
+      <button
+        onClick={() => {
+          removeToast(id);
+          previousFocus.current?.focus();
+        }}
+        className="toast-close"
+        aria-label="Close notification"
+      >
         <IoCloseCircle color="red" size={30} />
       </button>
 

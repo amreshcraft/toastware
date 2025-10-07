@@ -15,6 +15,7 @@ export interface ToastContextType {
     duration?: number
   ) => void;
   removeToast: (id: string) => void;
+  clearAllToast :()=>void;
 }
 
 

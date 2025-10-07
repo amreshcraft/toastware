@@ -10,13 +10,17 @@ import ToastContainer from "../toast-container/ToastContainer";
 export const ToastContext = createContext<ToastContextType | null>(null);
 
 export default function ToastProvider({ children }: { children: ReactNode }) {
-const [portalRoot, setPortalRoot] = useState<HTMLElement>();
+    const [portalRoot, setPortalRoot] = useState<HTMLElement>();
 
-useEffect(() => {
-  setPortalRoot(getOrCreatePortalRoot());
-}, []);
+    useEffect(() => {
+        setPortalRoot(getOrCreatePortalRoot());
+    }, []);
 
     const [toasts, setToasts] = useState<ToastItem[]>([])
+
+    function clearAllToast() {
+        setToasts([]);
+    }
 
     const removeToast = useCallback((id: string) => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
@@ -28,26 +32,23 @@ useEffect(() => {
             const newToast: ToastItem = { id, message, type, position, duration };
             setToasts((prev) => [...prev, newToast]);
 
-            // if (duration > 0) {
-            //     setTimeout(() => removeToast(id), duration);
-            // }
         },
         []
     );
 
-    const value = useMemo(() => ({ addToast, removeToast }), [addToast, removeToast]);
+    const value = useMemo(() => ({ addToast, removeToast, clearAllToast }), [addToast, removeToast, clearAllToast]);
     return (
         <ToastContext.Provider value={value}>
             {children}
             {/* render all toast in react portal */}
 
-            { portalRoot &&
+            {portalRoot &&
                 ReactDOM.createPortal(
-                  <ToastContainer toasts={toasts}/> ,
+                    <ToastContainer toasts={toasts} />,
                     portalRoot!
                 )
-                
-                }
+
+            }
 
         </ToastContext.Provider>
     )
