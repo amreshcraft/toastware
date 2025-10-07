@@ -7,12 +7,12 @@ export function useToast() {
     if (!context) {
         throw new Error("useToast must use within ToastContainer or context is not defined")
     }
-  const { addToast, removeToast,clearAllToast } = context;
+  const { addToast, removeToast,clearToasts } = context;
 
   return {
     addToast,
     removeToast,
-    clearAllToast,
+    clearToasts,
     success: (msg: string, position?: ToastItem["position"]) =>
       addToast(msg, "success", position),
     error: (msg: string, position?: ToastItem["position"]) =>

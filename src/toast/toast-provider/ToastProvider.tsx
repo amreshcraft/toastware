@@ -18,7 +18,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
 
     const [toasts, setToasts] = useState<ToastItem[]>([])
 
-    function clearAllToast() {
+    function clearToasts() {
         setToasts([]);
     }
 
@@ -36,7 +36,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
         []
     );
 
-    const value = useMemo(() => ({ addToast, removeToast, clearAllToast }), [addToast, removeToast, clearAllToast]);
+    const value = useMemo(() => ({ addToast, removeToast, clearToasts }), [addToast, removeToast, clearToasts]);
     return (
         <ToastContext.Provider value={value}>
             {children}
