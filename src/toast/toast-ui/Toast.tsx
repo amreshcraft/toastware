@@ -92,7 +92,7 @@ export default function Toast({ id, message, type = "info", position, duration =
     >
       <div className="toast-content">
         <Icon size={45} />
-        <span>{message}</span>
+        <p className='.toast-message'>{message}</p>
       </div>
       <button
         onClick={() => {

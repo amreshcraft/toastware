@@ -13,14 +13,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 300px;
-  max-width: 500px;
+  min-width: 200px;
+  max-width: 95vw;
   padding: 8px 12px;
+  margin: 5px;
   border-radius: 10px;
   position: relative;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: toast-slide-in 0.3s ease-out;
+    word-wrap: break-word;
 }
+
+.toast-message{
+ 
+}
+
 
 .toast.top-right,
 .toast.bottom-right {
@@ -38,10 +45,19 @@
 
 
 
+
+
 .toast-content {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap; 
+}
+
+.toast-content span {
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .toast[data-toast-type="info"] {
