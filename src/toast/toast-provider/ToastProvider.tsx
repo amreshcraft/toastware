@@ -1,8 +1,9 @@
 import { createContext, useCallback, useEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
-import getOrCreatePortalRoot from "../utils";
+import getOrCreatePortalRoot from "../utils/getOrCreatePortalRoot";
 import type { ToastContextType, ToastItem } from "../types/types";
 import ToastContainer from "../toast-container/ToastContainer";
+import { registerAPI } from "../core/globalStore";
 
 
 
@@ -36,12 +37,15 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
         []
     );
 
+useEffect(()=>{
+    registerAPI({addToast,removeToast,clearToasts})
+}, [addToast, removeToast, clearToasts])
+
     const value = useMemo(() => ({ addToast, removeToast, clearToasts }), [addToast, removeToast, clearToasts]);
     return (
         <ToastContext.Provider value={value}>
             {children}
             {/* render all toast in react portal */}
-
             {portalRoot &&
                 ReactDOM.createPortal(
                     <ToastContainer toasts={toasts} />,

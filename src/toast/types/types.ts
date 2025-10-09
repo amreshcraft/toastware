@@ -19,4 +19,14 @@ export interface ToastContextType {
 }
 
 
-
+export interface ToastAPI{
+    addToast? :(...args : any[])=>void
+    notify? :(...args : any[])=>void,
+    success? : (...args : any[])=>void,
+    error? : (...args : any[])=>void,
+    info? : (...args : any[])=>void,
+    removeById? :(id : string)=>void,
+    removeToast? : (id : string)=>void;
+    clearToasts? :()=>void
+    clear? : ()=>void
+}

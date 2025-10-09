@@ -1,22 +1,28 @@
-import { useContext } from "react";
-import type { ToastItem } from "../types/types";
-import { ToastContext } from "../toast-provider/ToastProvider";
+
+import toaster from "../toaster";
 
 export function useToast() {
-   const context = useContext(ToastContext);
+   const context = toaster;
     if (!context) {
         throw new Error("useToast must use within ToastContainer or context is not defined")
     }
-  const { addToast, removeToast,clearToasts } = context;
+  const {
+    addToast,
+    notify,
+    removeToast,
+    clearToasts,
+    success,
+    error ,
+    info, 
+  } = context;
 
   return {
     addToast,
+    notify,
     removeToast,
     clearToasts,
-    success: (msg: string, position?: ToastItem["position"]) =>
-      addToast(msg, "success", position),
-    error: (msg: string, position?: ToastItem["position"]) =>
-      addToast(msg, "error", position),
-    info :(msg:string,position?: ToastItem["position"])=>addToast(msg,"info",position)
+    success,
+    error ,
+    info, 
   };
 }

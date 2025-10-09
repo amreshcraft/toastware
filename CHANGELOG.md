@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 ---
 
+
+## [2.0.0] - 2025-10-09
+
+### Added
+* Global Toast API (toaster object):
+You can now trigger toasts globally without using the useToast() hook.
+Simply import toaster and call methods like:
+toaster.success("Data saved!");
+toaster.error("Something went wrong!");
+toaster.addToast("Custom message", "info", "top-left");
+
+* Accessibility improvements (ARIA roles, screen reader support).
+
+
+
 ## [1.0.4] - 2025-10-04
 
 ### Added
@@ -18,11 +33,4 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [Unreleased]
 
-### Planned
-
-* Custom animations for toast entry/exit.
-* Dark mode support.
-* Accessibility improvements (ARIA roles, screen reader support).
-* Add ability to render custom React components inside toasts.

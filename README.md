@@ -41,6 +41,47 @@ function App() {
 ```
 
 ---
+## Global Toast API (No Hooks Needed)
+
+You can now use **Toastware** globally without importing or calling the `useToast()` hook in your React components.
+Simply import the `toastware` object and start triggering toasts anywhere in your app — even outside React components!
+
+### ✅ Example Usage
+
+```tsx
+import toastware from "toastware";
+
+function App() {
+  return (
+    <div>
+      <button onClick={() => toastware.success("Operation successful!")}>
+        Show Success Toast
+      </button>
+      <button onClick={() => toastware.error("Something went wrong!")}>
+        Show Error Toast
+      </button>
+      <button onClick={() => toastware.addToast("Custom message", "info", "top-left")}>
+        Custom Toast
+      </button>
+    </div>
+  );
+}
+```
+
+### 📦 Available Methods
+
+| Method                                                   | Description                           | Example                                              |
+| -------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| `toastware.addToast(message, type?, position?, duration?)` | Adds a custom toast with full control | `toastware.addToast("Saved!", "success", "top-right")` |
+| `toastware.notify(message, type?, position?, duration?)`|Alias for addToast()| `toastware.notify("Saved!", "success", "top-right")`|
+| `toastware.success(message, position?)`                    | Shows a success toast                 | `toastware.success("Profile updated!")`                |
+| `toastware.error(message, position?)`                      | Shows an error toast                  | `toastware.error("Network error!")`                    |
+| `toastware.info(message, position?)`                       | Shows an info toast                   | `toastware.info("New update available")`               |
+| `toastware.removeToast(id)`                                | Removes a specific toast by ID        | —                                                    |
+| `toastware.clearToasts()`                                  | Clears all toasts                     | `toastware.clearToasts()`                              |
+| `toastware.clear()`                                        | Alias for `clearToasts()`             | `toastware.clear()`                                    |
+
+---
 
 ### 2. Use the `useToast` hook
 
