@@ -8,12 +8,22 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 * Global Toast API (toaster object):
-You can now trigger toasts globally without using the useToast() hook.
+You can now trigger toasts globally without using the `useToast()` hook.
 Simply import toaster and call methods like:
+```js
 toaster.success("Data saved!");
 toaster.error("Something went wrong!");
 toaster.addToast("Custom message", "info", "top-left");
-
+```
+* Promise-Based Toasts:
+Added support for `toaster.promise()` to handle async feedback states.
+```js
+toaster.promise(fetchData(), {
+  loading: "Loading...",
+  success: "Loaded successfully!",
+  error: "Failed to load.",
+});
+```
 * Accessibility improvements (ARIA roles, screen reader support).
 
 

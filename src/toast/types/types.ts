@@ -20,13 +20,19 @@ export interface ToastContextType {
 
 
 export interface ToastAPI{
-    addToast? :(...args : any[])=>void
-    notify? :(...args : any[])=>void,
-    success? : (...args : any[])=>void,
-    error? : (...args : any[])=>void,
-    info? : (...args : any[])=>void,
+    addToast? :(...args : any[])=>string
+    notify? :(...args : any[])=>string,
+    success? : (...args : any[])=>string,
+    error? : (...args : any[])=>string,
+    info? : (...args : any[])=>string,
     removeById? :(id : string)=>void,
     removeToast? : (id : string)=>void;
     clearToasts? :()=>void
     clear? : ()=>void
+}
+
+export interface PromiseToastMessages<T = any> {
+  loading: string;
+  success: string ;
+  error: string ;
 }

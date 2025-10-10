@@ -32,7 +32,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
             const id = crypto.randomUUID();
             const newToast: ToastItem = { id, message, type, position, duration };
             setToasts((prev) => [...prev, newToast]);
-
+             return id;
         },
         []
     );

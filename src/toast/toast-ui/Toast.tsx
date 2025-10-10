@@ -6,6 +6,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { IoWarning, IoCloseCircle } from "react-icons/io5";
 import { MdOutlineError } from "react-icons/md";
+import toaster from '../toaster';
 
 const ToastIcons: Record<"info" | "success" | "warning" | "error", React.ComponentType<{ size?: number; color?: string }>> = {
   info: FaInfoCircle,
@@ -15,7 +16,7 @@ const ToastIcons: Record<"info" | "success" | "warning" | "error", React.Compone
 };
 
 export default function Toast({ id, message, type = "info", position, duration = 5000 }: ToastItem) {
-  const { removeToast } = useToast();
+  const { removeToastById } = toaster;
   const [progress, setProgress] = useState(100);
   const [isPaused, setIsPaused] = useState(false);
   const toastRef = useRef<HTMLDivElement>(null)
@@ -33,13 +34,13 @@ export default function Toast({ id, message, type = "info", position, duration =
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        removeToast(id);
+        removeToastById(id);
         previousFocus.current?.focus();
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [id, removeToast]);
+  }, [id, removeToastById]);
 
   // Progress logic
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Toast({ id, message, type = "info", position, duration =
 
       if (newRemaining <= 0) {
         setProgress(0);
-        removeToast(id);
+        removeToastById(id);
         previousFocus.current?.focus();
         clearInterval(interval);
       } else {
@@ -65,7 +66,7 @@ export default function Toast({ id, message, type = "info", position, duration =
     }
 
     return () => clearInterval(interval);
-  }, [id, removeToast, duration, isPaused]);
+  }, [id, removeToastById, duration, isPaused]);
 
   const handlePause = () => {
     setIsPaused(true);
@@ -96,7 +97,7 @@ export default function Toast({ id, message, type = "info", position, duration =
       </div>
       <button
         onClick={() => {
-          removeToast(id);
+          removeToastById(id);
           previousFocus.current?.focus();
         }}
         className="toast-close"

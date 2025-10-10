@@ -76,13 +76,43 @@ function App() {
 | `toastware.notify(message, type?, position?, duration?)`|Alias for addToast()| `toastware.notify("Saved!", "success", "top-right")`|
 | `toastware.success(message, position?)`                    | Shows a success toast                 | `toastware.success("Profile updated!")`                |
 | `toastware.error(message, position?)`                      | Shows an error toast                  | `toastware.error("Network error!")`                    |
+| `toastware.warning(message, position?)`                      | Shows an warning toast                  | `toastware.warning("Warning : message!")` ||
 | `toastware.info(message, position?)`                       | Shows an info toast                   | `toastware.info("New update available")`               |
-| `toastware.removeToast(id)`                                | Removes a specific toast by ID        | —                                                    |
+| `toastware.removeToastById(id)`                                | Removes a specific toast by ID        | —                                                    |
 | `toastware.clearToasts()`                                  | Clears all toasts                     | `toastware.clearToasts()`                              |
 | `toastware.clear()`                                        | Alias for `clearToasts()`             | `toastware.clear()`                                    |
 
 ---
 
+## ⏳ Promise-Based Toasts
+
+Toastware now supports promise-based toast notifications — perfect for async tasks like API calls or file uploads.
+
+### Example:
+
+```tsx
+toaster.promise(fetch("/api/user"), {
+  loading: "Fetching user data...",
+  success: "User loaded successfully!",
+  error: "Failed to fetch user data.",
+});
+```
+
+### Promise API
+
+| Key       | Type   | Description                            |
+| --------- | ------ | -------------------------------------- |
+| `loading` | string | Message shown while promise is pending |
+| `success` | string | Message shown when promise resolves    |
+| `error`   | string | Message shown when promise rejects     |
+
+---
+
+
+
+
+
+---
 ### 2. Use the `useToast` hook
 
 ```tsx
