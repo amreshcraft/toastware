@@ -6,12 +6,14 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/types",
     "outDir": "./dist",
     "strict": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist","src/App.css","src/App.tsx","main.tsx","src/index.css"],
+  "exclude": ["node_modules", "dist", "example", "vite.config.ts"]
 }

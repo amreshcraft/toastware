@@ -1,6 +1,6 @@
 {
   "name": "toastware",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "description": "A lightweight React toast notification library with animations and custom styles.",
   "types": "./dist/index.d.ts",
@@ -32,17 +32,14 @@
   },
   "peerDependencies": {
     "react": ">=17.0.0",
-    "react-dom": ">=17.0.0"
+    "react-dom": ">=17.0.0",
+    "react-icons": ">=4"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview"
-  },
-  "dependencies": {
-    "react-icons": ">=4"
-
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -63,8 +60,7 @@
     "typescript-eslint": "^8.44.0",
     "vite": "^7.1.9",
     "vite-plugin-css-injected-by-js": "^3.5.2",
-    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-dts": "3.7.0",
     "vite-plugin-imagemin": "^0.6.1"
   }
- 
 }

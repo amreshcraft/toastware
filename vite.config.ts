@@ -13,11 +13,11 @@ export default defineConfig({
     visualizer({ open: true }),
     dts({
       insertTypesEntry: true,
-      rollupTypes: true,
       tsconfigPath: resolve(__dirname, 'tsconfig.json'),
       include: ['src/**/*', 'src/toast/types/css.d.ts', 'src/toast/types/assets.d.ts', 'src/toast/types/types.ts'],
       exclude: ['node_modules', 'dist','src/App.tsx','src/main.tsx','src/App.css','src/index.css'],
       outDir: 'dist',
+      rollupTypes: false, 
     }),
       viteImagemin({
       gifsicle: { optimizationLevel: 7 },
